@@ -46,7 +46,7 @@ var noteToNum = function (note) {
   }
 }
 
-noteArrToNumArr = function (noteArr) {
+relativeNoteArrToNumArr = function (noteArr) {
   numArr = [];
   for (var i = 0; i < noteArr.length; i++) {
     numArr.push(noteToNum(noteArr[i]));
@@ -56,7 +56,7 @@ noteArrToNumArr = function (noteArr) {
 
 module.exports = {
   noteToNum: noteToNum, 
-  noteArrToNumArr: noteArrToNumArr
+  relativeNoteArrToNumArr: relativeNoteArrToNumArr
 }
 
 
