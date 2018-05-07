@@ -25,6 +25,10 @@ function trimWhiteSpaceFromBars(bars) {
   return trimmedBars;
 }
 
+/**
+ * 
+ * @param {String} str Checks if more than one white-spaces
+ */
 var containsMoreThanOneWhiteSpace = function (str) {
   arr = str.split("  ");
   if (arr.length > 1) {
@@ -43,12 +47,11 @@ var containsLineFeed = function (str) {
   }
 }
 
-
-var removeEmptyElementFromArray = function(arr){
+var removeEmptyElementFromArray = function (arr) {
   trimmedArr = [];
-  for(element of arr){
-    if( !(element.includes(" ")) ){
-      if(element !== ""){
+  for (element of arr) {
+    if (!(element.includes(" "))) {
+      if (element !== "") {
         trimmedArr.push(element);
       }
     }
@@ -56,46 +59,49 @@ var removeEmptyElementFromArray = function(arr){
   return trimmedArr;
 }
 
-var generateThings = function (userInputNotes) {
-
-  if (containsMoreThanOneWhiteSpace(userInputNotes)) {
-    console.log("found spaces :( ");
-    return "ERROR! :: Your Shworolipi contains two or more white-spaces. Please separate notes with only single spaces"
-  } else if (userInputNotes.includes("\n")){
-    console.log("line-feeds found :( ");
-    return "ERROR! :: Your Shworolipi contains line-feeds. Please don't hit enter while typing the Shworolipi!"
-  } else {
-    var bars = userInputNotes.split("/");
-    var barsWithNoteCount = [];
-    var allRelativeNotes = [];
-
-    for (var i = 0; i < bars.length; i++) {
-      singleRelativeNotesInBars = bars[i].split(" ");
-      barsWithNoteCount.push([]);
-      for (var j = 0; j < singleRelativeNotesInBars.length; j++) {
-        if (singleRelativeNotesInBars[j] !== "") {
-
-          relativeFractionalNote = analyseStringWrtPlusSign(singleRelativeNotesInBars[j]);
-          for (var k = 0; k < (relativeFractionalNote.notes).length; k++) {
-
-            allRelativeNotes.push(( (relativeFractionalNote.notes)[k]).trim());
-
-          }
-          (barsWithNoteCount[i]).push(relativeFractionalNote.count);
-        }
-      }
+var trimEveryNoteOfArr = function (arr) {
+  tempArr = []
+  for (el of arr) {
+    if (el !== "" && el !== "\n") {
+      tempArr.push(el);
     }
-
-    allRelativeNotes = removeEmptyElementFromArray(allRelativeNotes);
-    var relativeNotesSet = new Set(allRelativeNotes);
-    return {
-      "noteList": allRelativeNotes,
-      "noteSet": Array.from(relativeNotesSet),
-      "bars": trimWhiteSpaceFromBars(bars),
-      "noOfBars": bars.length,
-      "barsWithNoteCount": barsWithNoteCount
-    };
   }
+  return tempArr;
+}
+
+var findLineFeedAndJoin = function (str) {
+  arr = str.split("\n");
+  return arr.join(" ");
+}
+
+var generateThings = function (userInputNotes) {
+  userInputNotes = findLineFeedAndJoin(userInputNotes);
+  var bars = userInputNotes.split("/");
+  var barsWithNoteCount = [];
+  var allRelativeNotes = [];
+
+  for (var i = 0; i < bars.length; i++) {
+    singleRelativeNotesInBars = bars[i].split(" ");
+    singleRelativeNotesInBars = trimEveryNoteOfArr(singleRelativeNotesInBars);
+    barsWithNoteCount.push([]);
+    for (var j = 0; j < singleRelativeNotesInBars.length; j++) {
+      relativeFractionalNote = analyseStringWrtPlusSign(singleRelativeNotesInBars[j]);
+      for (var k = 0; k < (relativeFractionalNote.notes).length; k++) {
+        allRelativeNotes.push(((relativeFractionalNote.notes)[k]).trim());
+      }
+      (barsWithNoteCount[i]).push(relativeFractionalNote.count);
+    }
+  }
+
+  allRelativeNotes = removeEmptyElementFromArray(allRelativeNotes);
+  var relativeNotesSet = new Set(allRelativeNotes);
+  return {
+    "noteList": allRelativeNotes,
+    "noteSet": Array.from(relativeNotesSet),
+    "bars": trimWhiteSpaceFromBars(bars),
+    "noOfBars": bars.length,
+    "barsWithNoteCount": barsWithNoteCount
+  };
 }
 
 module.exports = {

@@ -4,9 +4,10 @@
   "description": "Sa-Re-Ga-Ma to sound generator",
   "main": "./src/main.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1", 
+    "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack",
-    "serve": "webpack-dev-server"
+    "serve": "webpack-dev-server", 
+    "start": "webpack && webpack-dev-server"
   },
   "author": "Galib Hassan",
   "license": "ISC",
