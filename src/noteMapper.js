@@ -1,6 +1,8 @@
 var noteToNum = function (note) {
   switch (note) {
-    // Mondro shoptok    
+    //rest
+    case '-': return '-';
+    // Mondro shoptok
     case 'SA_' : case 'সা_': return 1 - 12;
     case 're_' : case 'ঋ_': return 2 - 12;
     case 'RE_' : case 'রে_': case 'রা_': return 3 - 12;
@@ -60,3 +62,5 @@ module.exports = {
 }
 
 
+arrr =  [ 'রে', 'গা', '-',  'রে', 'GA' ]
+console.log(relativeNoteArrToNumArr(arrr));

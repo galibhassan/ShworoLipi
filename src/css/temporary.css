@@ -1,26 +1,97 @@
+.contento {
+  height: 500px;
+}
+.scroll4::-webkit-scrollbar {
+  width: 11px;
+  box-shadow: 1px 5px 49px 1px rgba(0,0,0,.3);
+  
+}
+.scroll4::-webkit-scrollbar-thumb {
+  background: rgb(124, 124, 124);
+  border-radius: 10px;
+
+}
+.scroll4::-webkit-scrollbar-track {
+  background: rgb(170, 170, 170);
+  border-radius: 10px;
+}
+
+
+.smallText{
+  font-size: .7rem;
+  color: rgb(168, 168, 168);
+}
 *{
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   outline: none;
   color: rgb(95, 95, 95);
+  margin: 0px;
 }
 body{
-  margin: 100px;
-  background: rgb(240, 240, 240)
+  background: rgb(240, 240, 240);
+  display: grid;
+  grid-template-rows: 1fr;
+  grid-template-columns: 2fr 5fr 1fr;
+  grid-gap: 30px;
 }
+
+
+.sideBar{
+  grid-column: 1/2;
+  background-color: rgb(87, 87, 88);
+  position: static;
+  height: 100vh;
+  overflow: auto;
+  min-width: 270px;
+}
+.shworolipiRules{
+  color: rgb(207, 207, 207);
+  padding: 50px;
+  padding-top: 35px;
+  font-size: .9rem;
+}
+.shworolipiRules h4{
+  color: rgb(206, 204, 204);
+  font-size: 1.5rem;
+}
+.shworolipiRules b{
+  color: rgba(249, 249, 249, 1)
+}
+
+.mainApp{
+  grid-column: 2/3;
+  margin: 20px;
+}
+
 h1{
   letter-spacing: 6px;
+  margin-top: 20px;
+}
+h4{
+  margin-top: 10px;
+  margin-bottom: 10px
 }
 
 #date{
   font-size: .7rem;
 }
 
+.tonicSelectorContainer{
+  float: right;
+  color: rgb(216, 216, 219);
+  margin-top: -45px;
+  padding-left: 10px;
+  background-color: rgba(87, 87, 88,1);
+  border-radius: 4px;
+  box-shadow: 1px 5px 49px 1px rgba(0,0,0,.3);
+}
+
 select{
   border: 0px;
-  padding: 5px;
-  box-shadow: 1px 5px 49px 1px rgba(0,0,0,.3);
+  padding: 6px;
+  background-color: rgb(247, 247, 248);
+  box-shadow: 1px 5px 49px 1px rgba(0,0,0,.1);
   border-radius: 3px;
-  
 }
 option{
   color: snow;
@@ -31,7 +102,7 @@ option{
 }
 
 .container{
-  margin-top: 50px;
+  margin-top: 60px;
   min-width: 550px;;
 }
 .titleBar{
@@ -56,6 +127,8 @@ option{
   z-index: -10;
   border-bottom: 3px solid  rgba(231, 97, 20, 0);
   transition: border-bottom .5s;
+  max-height: 150px;
+  overflow: auto;
 }
 .userInputNotesClass:focus{
   border-bottom: 3px solid rgba(255, 237, 75, 0.5);
@@ -96,4 +169,15 @@ option{
   box-shadow: 1px 1px 49px 1px rgba(0,0,0,.1);
   text-align: center;
   padding-top: 20px;
+}
+
+
+#devMessage{
+  margin-top: 10px;
+  font-size: 0.7rem;
+  letter-spacing: 0px;
+  color: rgb(158, 156, 156);
+}
+#devMessage em{
+  color: rgb(172, 169, 169);
 }

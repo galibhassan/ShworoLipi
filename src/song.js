@@ -23,7 +23,7 @@ song.prototype.length = function () {
   return (this.relativeNotes).length;
 }
 
-song.prototype.getNumberedNotes = function(){
+song.prototype.getNumberedNotes = function () {
   return noteMapper.relativeNoteArrToNumArr(this.relativeNotes);
 }
 
@@ -32,7 +32,12 @@ song.prototype.getAbsoluteNotes = function () {
   tonicPosition = utils.findNoteIndexInAllNotes(allNotes, this.tonic);
   numberedNotes = this.getNumberedNotes();
   for (var i = 0; i < (this.relativeNotes).length; i++) {
-    requiredPositionsInAllNotes.push(tonicPosition + numberedNotes[i] - 1);
+    if (numberedNotes[i] === '-') {
+      // '-' is placed as 96th element in /src/allNotes.js 
+      requiredPositionsInAllNotes.push(96);
+    } else {
+      requiredPositionsInAllNotes.push(tonicPosition + numberedNotes[i] - 1);
+    }
   }
   absoluteNotes = [];
   for (var i = 0; i < requiredPositionsInAllNotes.length; i++) {
