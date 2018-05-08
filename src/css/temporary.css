@@ -164,10 +164,12 @@ option{
 
 #warningDiv{
   margin-top: 100px;
-  height: 50px;
+  padding: 20px;
+  letter-spacing: 2px;
+  height: auto;
   background-color: white;
   box-shadow: 1px 1px 49px 1px rgba(0,0,0,.1);
-  text-align: center;
+  text-align: left;
   padding-top: 20px;
 }
 

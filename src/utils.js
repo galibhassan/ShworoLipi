@@ -4,7 +4,6 @@
  * @param {String} note The note whose position index in allNotes is to search
  */
 function findNoteIndexInAllNotes(allNotes, note) {
-  console.log("debug: called");
   for (var i = 0; i < allNotes.length; i++) {
       if (allNotes[i] === note) {
           return i;

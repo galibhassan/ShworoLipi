@@ -3,18 +3,18 @@ var noteToNum = function (note) {
     //rest
     case '-': return '-';
     // Mondro shoptok
-    case 'SA_' : case 'সা_': return 1 - 12;
-    case 're_' : case 'ঋ_': return 2 - 12;
-    case 'RE_' : case 'রে_': case 'রা_': return 3 - 12;
-    case 'ga_' : case 'জ্ঞা_': return 4 - 12;
-    case 'GA_' : case 'গা_': return 5 - 12;
-    case 'ma_' : case 'মা_': return 6 - 12;
-    case 'MA_' : case 'হ্মা_': return 7 - 12;
+    case 'SA_': case 'সা_': return 1 - 12;
+    case 're_': case 'ঋ_': return 2 - 12;
+    case 'RE_': case 'রে_': case 'রা_': return 3 - 12;
+    case 'ga_': case 'জ্ঞা_': return 4 - 12;
+    case 'GA_': case 'গা_': return 5 - 12;
+    case 'ma_': case 'মা_': return 6 - 12;
+    case 'MA_': case 'হ্মা_': return 7 - 12;
     case 'PA_': case 'pa_': case 'পা_': return 8 - 12;
-    case 'da_' : case 'দা_': return 9 - 12;
-    case 'DHA_' : case 'ধা_': return 10 - 12;
-    case 'ni_' : case 'ণি_': case 'ণা_': case 'ণী_': return 11 - 12;
-    case 'NI_' : case 'না_': case 'নি_': case 'নী_': return 12 - 12;
+    case 'da_': case 'দা_': return 9 - 12;
+    case 'DHA_': case 'ধা_': return 10 - 12;
+    case 'ni_': case 'ণি_': case 'ণা_': case 'ণী_': return 11 - 12;
+    case 'NI_': case 'না_': case 'নি_': case 'নী_': return 12 - 12;
 
     // Moddho Shoptok
     case 'SA': case 'সা': return 1;
@@ -48,6 +48,28 @@ var noteToNum = function (note) {
   }
 }
 
+var noteToFreq = function (note) {
+  switch (note) {
+    case 'C5': return 523.25
+    case 'Cs5': return 587.33
+    case 'D5': return 554.37
+    case 'Ds5': return 622.25
+    case 'E5': return 659.25
+    case 'F5': return 698.46
+    case 'Fs5': return 739.99
+    case 'G5': return 783.99
+    case 'Gs5': return 830.61
+    case 'A5': return 880.00
+    case 'Bf5': return 932.33
+    case 'B5': return 987.77
+    case 'C6': return 1046.50
+  }
+}
+
+
+
+
+
 relativeNoteArrToNumArr = function (noteArr) {
   numArr = [];
   for (var i = 0; i < noteArr.length; i++) {
@@ -57,10 +79,9 @@ relativeNoteArrToNumArr = function (noteArr) {
 }
 
 module.exports = {
-  noteToNum: noteToNum, 
-  relativeNoteArrToNumArr: relativeNoteArrToNumArr
+  noteToNum: noteToNum,
+  relativeNoteArrToNumArr: relativeNoteArrToNumArr, 
+  noteToFreq: noteToFreq
 }
 
 
-arrr =  [ 'রে', 'গা', '-',  'রে', 'GA' ]
-console.log(relativeNoteArrToNumArr(arrr));
