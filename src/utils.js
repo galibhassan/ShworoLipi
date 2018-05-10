@@ -12,7 +12,45 @@ function findNoteIndexInAllNotes(allNotes, note) {
   }
 }
 
-module.exports = {
-  findNoteIndexInAllNotes: findNoteIndexInAllNotes
+var mergeBarsIntoSingleArr = function (doubleArr) {
+  var singleArr = [];
+  for (var i = 0; i < doubleArr.length; i++) {
+    singleArr = singleArr.concat(doubleArr[i]);
+  }
+  return singleArr;
 }
+
+
+var makeCumulativeArr = function(arr){
+  resultArr = [];
+  currentSum = 0;
+  for(var i=0; i<arr.length; i++){
+    currentSum += arr[i];
+    resultArr.push(currentSum);
+  }
+  return resultArr;
+}
+
+
+
+var makeTimeArr = function (singlifiedBar, beatDuration) {
+  timeArr = [];
+  for (noteCount of singlifiedBar) {
+    for (var i = 0; i < noteCount; i++) {
+      entryToPush = Number((beatDuration / noteCount).toFixed(2));
+      timeArr.push(entryToPush);
+    }
+  }
+  return timeArr;
+}
+
+
+
+module.exports = {
+  findNoteIndexInAllNotes: findNoteIndexInAllNotes,
+  mergeBarsIntoSingleArr: mergeBarsIntoSingleArr, 
+  makeCumulativeArr: makeCumulativeArr, 
+  makeTimeArr: makeTimeArr
+}
+
 

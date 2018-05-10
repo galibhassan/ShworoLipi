@@ -60,34 +60,6 @@ function playOscNotes(noteList, cumulativeTimeArr){
     setInterval(changeTheNote(song_absNotes, cumulativeTimeArr, osc), 100);
 */
 
-var makeCumulativeArr = function(arr){
-  resultArr = [];
-  currentSum = 0;
-  for(var i=0; i<arr.length; i++){
-    currentSum += arr[i];
-    resultArr.push(currentSum);
-  }
-  return resultArr;
-}
-
-var mergeIntoSingleArr = function (doubleArr) {
-  var singleArr = [];
-  for (var i = 0; i < doubleArr.length; i++) {
-    singleArr = singleArr.concat(doubleArr[i]);
-  }
-  return singleArr;
-}
-
-var makeTimeArr = function (singlifiedBar, beatDuration) {
-  timeArr = [];
-  for (noteCount of singlifiedBar) {
-    for (var i = 0; i < noteCount; i++) {
-      entryToPush = Number((beatDuration / noteCount).toFixed(2));
-      timeArr.push(entryToPush);
-    }
-  }
-  return timeArr;
-}
 
 
 var playSongSound = function (noteList, timeArr) {
@@ -104,10 +76,7 @@ var playSongSound = function (noteList, timeArr) {
 }
 
 module.exports = {
-  mergeIntoSingleArr: mergeIntoSingleArr, 
-  makeTimeArr: makeTimeArr, 
   playSongSound: playSongSound, 
   playOsc: playOsc, 
-  makeCumulativeArr: makeCumulativeArr, 
   playOscNotes: playOscNotes
 }

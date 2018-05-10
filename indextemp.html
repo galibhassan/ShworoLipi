@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>temp</title>
+</head>
+
+<body>
+  <button id="pressButton">press!</button>
+  <script>
+    window.addEventListener("load", function () {
+      var pressButton = document.getElementById("pressButton");
+      pressButton.addEventListener("mousedown", function () {
+        initSound();
+      })
+
+      function initSound() {
+        window.AudioContext = window.AudioContext || window.webkitAudioContext;
+        context = new AudioContext();
+        soundFiles = [
+          './instruments/guitarAcoustic/C3.ogg',
+          './instruments/guitarAcoustic/Cs3.ogg',
+          './instruments/guitarAcoustic/D3.ogg',
+          './instruments/guitarAcoustic/Ds3.ogg',
+          './instruments/guitarAcoustic/E3.ogg',
+          './instruments/guitarAcoustic/F3.ogg',
+          './instruments/guitarAcoustic/Fs3.ogg',
+          './instruments/guitarAcoustic/G3.ogg',
+          './instruments/guitarAcoustic/Gs3.ogg',
+          './instruments/guitarAcoustic/A3.ogg',
+          './instruments/guitarAcoustic/Bf3.ogg',
+          './instruments/guitarAcoustic/B3.ogg',
+          './instruments/guitarAcoustic/C4.ogg',
+        ]
+        bufferLoader = new BufferLoader(context, soundFiles, onFinishedLoading);
+        bufferLoader.load();
+      }
+      
+      function playSound(in_buffer, time) {
+        var source = context.createBufferSource();
+        source.buffer = in_buffer;
+        source.connect(context.destination);
+        source.start(time);
+      }
+
+      function onFinishedLoading(bufferList) {
+        duration = [.25, .25, .25, .25, .5, .5, 1, 1, .5, .5, .5, .5,1]
+        for (var i = 0; i < bufferList.length; i++) {
+          playSound(bufferList[i], context.currentTime + i*duration[i] );
+          if(i>4) {
+            h = .5
+          };
+        }
+
+      }
+
+
+
+    })
+  </script>
+
+  <button id="playAudio">playAudio</button>
+
+  <script src="./temp/bufferLoaderOriginal.js"></script>
+</body>
+
+</html>
