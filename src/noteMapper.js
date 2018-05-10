@@ -75,6 +75,9 @@ var noteToFreq = function (note) {
  */
 var absNoteToFile = function (instrumentFolder, instrumentName, note, fileFormat) {
   var noOfOctaveAvailabe = 8;
+  if (note === '-') {
+    return `../${instrumentFolder}/${instrumentName}/-.${fileFormat}`;
+  } else {
     for (var i = 0; i < noOfOctaveAvailabe; i++) {
       switch (note) {
         case `C${i}`: return `../${instrumentFolder}/${instrumentName}/C${i}.${fileFormat}`;
@@ -88,9 +91,10 @@ var absNoteToFile = function (instrumentFolder, instrumentName, note, fileFormat
         case `Gs${i}`: return `../${instrumentFolder}/${instrumentName}/Gs${i}.${fileFormat}`;
         case `A${i}`: return `../${instrumentFolder}/${instrumentName}/A${i}.${fileFormat}`;
         case `Bf${i}`: return `../${instrumentFolder}/${instrumentName}/Bf${i}.${fileFormat}`;
-        case `B${i}`: return `../${instrumentFolder}/${instrumentName}/B${i}.${fileFormat}`; 
+        case `B${i}`: return `../${instrumentFolder}/${instrumentName}/B${i}.${fileFormat}`;
       }
     }
+  }
 }
 
 /**
@@ -121,6 +125,6 @@ relativeNoteArrToNumArr = function (noteArr) {
 module.exports = {
   noteToNum: noteToNum,
   relativeNoteArrToNumArr: relativeNoteArrToNumArr,
-  noteToFreq: noteToFreq, 
+  noteToFreq: noteToFreq,
   absNoteArrToFileArr: absNoteArrToFileArr
 }

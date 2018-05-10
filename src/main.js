@@ -4,11 +4,12 @@ var Song = require('./song');
 var BufferLoader = require('../external/bufferLoader');
 var utils = require('./utils');
 var noteMapper = require('./noteMapper');
-// var notePlayer = require('./notePlayer');
+var notePlayer = require('./notePlayer');
 
 // Globals
 var tonic = 'C5';
-var singleBitDuration = 1;
+var tempo = 120;
+var singleBitDurationInSec = 60/tempo;
 
 
 window.addEventListener('load', function () {
@@ -20,6 +21,13 @@ window.addEventListener('load', function () {
     console.log(tonic);
   });
 
+  // Tempo selection 
+  var tempoSelector = document.getElementById('tempo');
+  tempoSelector.addEventListener("change", function(){
+    tempo = tempoSelector.value;
+    singleBitDurationInSec = 60/tempo;
+  });
+
   // Things to happen while mainbutton is pressed
   var mainButton = document.getElementById("mainButton");
   mainButton.addEventListener("mousedown", function () {
@@ -29,42 +37,17 @@ window.addEventListener('load', function () {
     var song = new Song(shworolipi.noteList, tonic);
     var song_absNotes = song.getAbsoluteNotes();
     var singlifiedBarNoteCount = utils.mergeBarsIntoSingleArr(shworolipi.barsWithNoteCount);
-    var timeArr = utils.makeTimeArr(singlifiedBarNoteCount, singleBitDuration);
+    var timeArr = utils.makeTimeArr(singlifiedBarNoteCount, singleBitDurationInSec);
     var cumulativeTimeArr = utils.makeCumulativeArr(timeArr);
-
-
-
-
-
-
+    //prepending a zero
+    cumulativeTimeArr.unshift(0);
+    
 
 
 
     // playing note
-    initSound(song_absNotes);
+    notePlayer.initSound(song_absNotes, singleBitDurationInSec, cumulativeTimeArr);
 
-
-    function initSound(absNoteArr) {
-      window.AudioContext = window.AudioContext || window.webkitAudioContext;
-      context = new AudioContext();
-      var noteAudioFiles = noteMapper.absNoteArrToFileArr('instruments', 'guitarAcoustic', absNoteArr, 'ogg');
-      console.log(noteAudioFiles);
-      var bufferLoader = new BufferLoader(context, noteAudioFiles, onFinishedLoading);
-      bufferLoader.load();
-    }
-
-    function playSound(in_buffer, time) {
-      var source = context.createBufferSource();
-      source.buffer = in_buffer;
-      source.connect(context.destination);
-      source.start(time);
-    }
-
-    function onFinishedLoading(bufferList) {
-      for (var i = 0; i < bufferList.length; i++) {
-        playSound(bufferList[i], i);
-      }
-    }
 
 
 
@@ -76,7 +59,8 @@ window.addEventListener('load', function () {
     warningDiv.innerText = "Song info: \n" + "Relative Notes: " + shworolipi.noteList + "\n" + "Note Set (Unique): " + shworolipi.noteSet + "\n" + "No. of Bars: " + shworolipi.noOfBars + "\n" + "Note-count in single position: " + shworolipi.barsWithNoteCount + "\n" +
       `Absolute notes in ${tonic} scale: ` + song_absNotes + "\n" +
       `Time-array (note duration): ` + timeArr + "\n" +
-      `Cumulative time-array: ` + cumulativeTimeArr;
+      `Cumulative time-array: ` + cumulativeTimeArr + "\n" + 
+      `Tempo: ${tempo}, Single beat duration (in second): ${singleBitDurationInSec}`;
     // ---------------------------------------------  
 
   });
