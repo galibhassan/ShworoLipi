@@ -8,7 +8,7 @@ var notePlayer = require('./notePlayer');
 
 // Globals
 var tonic = 'C5';
-var tempo = 120;
+var tempo = 160;
 var singleBitDurationInSec = 60/tempo;
 
 
@@ -31,6 +31,7 @@ window.addEventListener('load', function () {
   // Things to happen while mainbutton is pressed
   var mainButton = document.getElementById("mainButton");
   mainButton.addEventListener("mousedown", function () {
+
 
     var userInputNotes = document.getElementById("userInputNotes").innerText;
     var shworolipi = inputTextAnalyzer.generateThings(userInputNotes);
