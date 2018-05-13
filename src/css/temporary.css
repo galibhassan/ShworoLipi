@@ -86,24 +86,6 @@ h4{
   border-radius: 4px;
   box-shadow: 1px 5px 49px 1px rgba(0,0,0,.3);
 }
-.tempoSelectorContainer{
-  margin-right: 200px;
-  float: right;
-  color: rgb(216, 216, 219);
-  margin-top: -45px;
-  padding-left: 10px;
-  background-color: rgba(87, 87, 88,1);
-  border-radius: 4px;
-  box-shadow: 1px 5px 49px 1px rgba(0,0,0,.3);  
-}
-#tempo{
-  width: 60px;
-  text-align: center;
-  height: 30px;
-  border: 0px;
-  border-radius: 4px;
-}
-
 
 select{
   border: 0px;
@@ -117,8 +99,29 @@ option{
   background-color: rgba(126, 114, 140, 0.9);
   border: 0px;
   border-radius: 3px;
-
 }
+.tempoSelectorContainer{
+  margin-right: 120px;
+  float: right;
+  color: rgb(216, 216, 219);
+  margin-top: -40px;
+  padding-left: 10px;
+  background-color: rgba(87, 87, 88,1);
+  border-radius: 4px;
+  box-shadow: 1px 5px 49px 1px rgba(0,0,0,.3);  
+}
+#tempo{
+  width: 60px;
+  text-align: center;
+  height: 30px;
+  border: 0px;
+  border-radius: 4px;
+  background-color: rgb(247, 247, 248);
+  font-size: inherit;
+}
+
+
+
 
 .container{
   margin-top: 60px;
@@ -149,7 +152,6 @@ option{
   transition: border-bottom .5s;
   max-height: 150px;
   overflow: auto;
-  max-width: 100%;
 }
 .userInputNotesClass:focus{
   border-bottom: 3px solid rgba(255, 237, 75, 0.5);
@@ -184,15 +186,21 @@ option{
   box-shadow: 1px 1px 49px 1px rgba(0,0,0,.1);
 }
 
-#warningDiv{
-  margin-top: 100px;
+
+.infoDiv{
+  margin-top: 10px;
   padding: 20px;
   letter-spacing: 2px;
   height: auto;
+  max-height: 150PX;
   background-color: white;
   box-shadow: 1px 1px 49px 1px rgba(0,0,0,.1);
   text-align: left;
   padding-top: 20px;
+  padding-left: 10px;
+  padding-right: 10px ;
+  max-width: 900px;
+  overflow: auto;
 }
 
 
