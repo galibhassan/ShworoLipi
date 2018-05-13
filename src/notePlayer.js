@@ -4,8 +4,6 @@ function initSound(absNoteArr, singleBeatDurationInSecond, cumulativeTimeArrayUn
   window.AudioContext = window.AudioContext || window.webkitAudioContext;
   context = new AudioContext();
   var noteAudioFiles = noteMapper.absNoteArrToFileArr('instruments', 'guitarAcoustic', absNoteArr, 'ogg');
-  console.log(noteAudioFiles);
-  console.log(cumulativeTimeArrayUnshifted);
   var bufferLoader = new BufferLoader(context, noteAudioFiles, onFinishedLoading);
   bufferLoader.load();
 
