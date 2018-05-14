@@ -1,0 +1,93 @@
+@import url('https://fonts.googleapis.com/css?family=Lato:100');
+@import url('./fonts/kalpurush/stylesheet.css');
+@import url('./fonts/siyamrupali/stylesheet.css');
+@import url('./fonts/durga/stylesheet.css');
+@media screen and (min-width:500px){
+
+}
+
+*{
+  margin: 0px;
+  outline: none;
+}
+.smallText{
+  font-weight: 100;
+  font-size: .8rem;
+}
+.floatRight{
+  float: right;
+}
+
+body{
+  display: grid;
+  grid-template-rows: 45px 300px 70px 285px 30px;
+  grid-template-columns: 1fr 1fr 1fr;
+  background-color: rgba(38, 45, 55,1);
+  color: rgba(250, 250, 250,1);
+  font-family: 'Lato', sans-serif;
+}
+
+.titleBar{
+  grid-column: 1/4;
+  grid-row: 1/2;
+  padding: 10px;
+  padding-left: 15px;
+  background-color: rgb(49, 62, 82);
+  font-size: 1.1rem;
+  letter-spacing: 3px;
+  font-weight: 900;
+  box-shadow: 1px 1px 40px 2px rgba(0,0,0,.5);
+  z-index: 1000;
+}
+
+.userInputText{
+  grid-column: 1/4;
+  grid-row: 2/3;
+  background-color: rgb(233, 233, 233);
+  color: rgb(74, 84, 99);
+  font-family: 'kalpurush';
+  font-size: 1.3rem;
+  font-weight: 600;
+  padding: 20px;
+  overflow: scroll;
+}
+
+.mainButton{
+  grid-column: 1/4;
+  grid-row: 3/4;
+  background-color: rgb(219, 14, 93);
+  color: rgb(233, 233, 233);
+  font-weight: 600;
+  border: 0px;
+  font-family: inherit;
+  font-size: 1.2rem;
+  letter-spacing: 8px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  box-shadow: 1px 5px 40px 2px rgba(0,0,0,.5);
+  z-index: 1000;
+}
+
+.instruction{
+  grid-column: 1/4;
+  grid-row: 4/5;
+  padding: 20px;
+  color: rgb(233, 233, 233);
+  overflow: scroll;
+  z-index: 100;
+}
+.footer{
+  grid-column: 1/4;
+  grid-row: 5/6;
+  text-align: center;
+  box-shadow: 1px -5px 19px 2px rgba(0,0,0,.5);
+  z-index: 1000;  
+  padding: 2px;
+  padding-right: 10px;
+  padding-top: 5px;
+  
+
+}
+
+
+
