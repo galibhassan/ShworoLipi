@@ -8,19 +8,25 @@
     "build": "webpack",
     "serve": "live-server",
     "start": "webpack-dev-server --output-public-path=/",
-    "electron": "electron ./indexElectron.js"
+    "electrondist": "electron-builder",
+    "electron": "electron ./indexElectron.js",
+    "electron-build": "electron-packager ."
   },
   "author": "Galib Hassan",
   "license": "ISC",
   "devDependencies": {
     "arraybuffer-loader": "^1.0.3",
+    "electron-builder": "^20.14.7",
+    "electron-packager": "^12.1.0",
     "live-server": "^1.2.0",
     "webpack": "2.6.1",
     "webpack-dev-server": "2.9.5"
   },
+  "build": {
+    "appId": "com.kadamati.shworolipika",
+    "productName": "Shworolipika"
+  },
   "dependencies": {
-    "electron": "^2.0.2",
-    "express": "^4.16.3",
-    "request": "^2.87.0"
+    "electron": "^2.0.2"
   }
 }

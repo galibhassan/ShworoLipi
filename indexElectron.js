@@ -16,10 +16,7 @@ app.on('ready', () => {
   server.listen(5000);
 
 
-  const mainWindow = new BrowserWindow({
-    width: 800,
-    height: 600,
-  });
+  const mainWindow = new BrowserWindow({});
   //mainWindow.loadURL(`file://${__dirname}/index.html`);
   //mainWindow.maximize();
   mainWindow.loadURL('http://localhost:5000/');
