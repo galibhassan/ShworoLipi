@@ -1,9 +1,11 @@
-var noteMapper = require('./noteMapper');
+var fileMapper = require('./fileMapper');
+
+
 var BufferLoader = require('../external/bufferLoader');
-function initSound(absNoteArr, singleBeatDurationInSecond, cumulativeTimeArrayUnshifted) {
+function initSound(absNoteArr, cumulativeTimeArrayUnshifted) {
   window.AudioContext = window.AudioContext || window.webkitAudioContext;
   context = new AudioContext();
-  var noteAudioFiles = noteMapper.absNoteArrToFileArr('instruments', 'guitarAcoustic', absNoteArr, 'ogg');
+  var noteAudioFiles = fileMapper.absNoteArrToFileArr('instruments', 'guitarAcoustic', absNoteArr, 'ogg');
   var bufferLoader = new BufferLoader(context, noteAudioFiles, onFinishedLoading);
   bufferLoader.load();
 
@@ -20,9 +22,6 @@ function initSound(absNoteArr, singleBeatDurationInSecond, cumulativeTimeArrayUn
       playSound(bufferList[i], context.currentTime + cumulativeTimeArrayUnshifted[i]);
     }
   }
-
-
-
 }
 
 

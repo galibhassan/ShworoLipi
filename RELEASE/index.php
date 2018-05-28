@@ -1,3 +1,5 @@
+<?php Header("Cache-Control: max-age=1, must-revalidate"); ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -6,7 +8,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <link rel="stylesheet" href="./temporary.css">
-  <link rel="shortcut icon" href="./favicon.ico" type="image/x-icon">
   <title>Shworolipika</title>
 </head>
 
@@ -74,7 +75,7 @@
     </script>
 
 
-    
+
 
     <div class="container">
 
@@ -82,7 +83,7 @@
         Tempo
         <input type="number" id="tempo" value="160" max="700" min="30">
       </div>
-      
+
 
       <div class="titleBar"> Insert your Notes below...
         <div class="tonicSelectorContainer">
@@ -98,12 +99,14 @@
       <div id="userInputNotes" class="userInputNotesClass scroll4" contenteditable="true" spellcheck="false">
         <span class="userInputPlaceHolder"> </span>
       </div>
+      <div id="inputErrorDiv" class="smallText">  </div>
+
       <button id="mainButton" class="button">Execute!</button>
     </div>
 
 
 
-    <div id="noteTranslateDiv" class="infoDiv smallText scroll4"> Your notes translate here</div>
+    <div id="noteTranslateDiv" class="infoDiv smallText scroll4"> Your notes translate here </div>
     <div id="warningDiv" class="infoDiv smallText scroll4"> Analysis</div>
 
     <p id="devMessage">

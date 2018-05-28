@@ -1,8 +1,0 @@
-Array.from(key_keySet)
-(44) ["Control", "a", "Backspace", "s", " ", "r", "e", "g", "m", "/", "p", "d", "h", "n", "i", "S", "A", "Shift", "CapsLock", "R", "E", "G", "M", "P", "D", "H", "N", "I", "Enter", "ArrowDown", "ArrowUp", "ArrowLeft", "ArrowRight", "_", "*", "Escape", "Alt", "Tab", "v", "c", "Unidentified", "ো", "ে", "ল"]
-
-Array.from(key_keyCodeSet)
-(30) [17, 65, 8, 83, 32, 82, 69, 71, 77, 191, 80, 68, 72, 78, 73, 16, 20, 13, 40, 38, 37, 39, 189, 106, 27, 18, 9, 86, 67, 231]
-
-Array.from(key_codeSet)
-(31) ["ControlLeft", "KeyA", "Backspace", "KeyS", "Space", "KeyR", "KeyE", "KeyG", "KeyM", "Slash", "KeyP", "KeyD", "KeyH", "KeyN", "KeyI", "ShiftRight", "CapsLock", "Enter", "ArrowDown", "ArrowUp", "ArrowLeft", "ArrowRight", "Minus", "ShiftLeft", "NumpadMultiply", "Escape", "AltLeft", "Tab", "KeyV", "KeyC", ""]
