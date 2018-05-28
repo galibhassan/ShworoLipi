@@ -16,5 +16,8 @@
     "live-server": "^1.2.0",
     "webpack": "2.6.1",
     "webpack-dev-server": "2.9.5"
+  },
+  "dependencies": {
+    "sacred-music": "^1.2.0"
   }
 }
