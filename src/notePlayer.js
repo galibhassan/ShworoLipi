@@ -1,11 +1,12 @@
 var fileMapper = require('./fileMapper');
-
+var sacredMusic = require('sacred-music');
 
 var BufferLoader = require('../external/bufferLoader');
-function initSound(absNoteArr, cumulativeTimeArrayUnshifted) {
+function initSound(absNoteArr, cumulativeTimeArrayUnshifted, absNoteSet) {
   window.AudioContext = window.AudioContext || window.webkitAudioContext;
   context = new AudioContext();
-  var noteAudioFiles = fileMapper.absNoteArrToFileArr('instruments', 'guitarAcoustic', absNoteArr, 'ogg');
+
+  var noteAudioFiles = fileMapper.absNoteArrToFileArr('instruments', 'guitarAcoustic', absNoteSet, 'ogg');
   var bufferLoader = new BufferLoader(context, noteAudioFiles, onFinishedLoading);
   bufferLoader.load();
 
@@ -18,15 +19,12 @@ function initSound(absNoteArr, cumulativeTimeArrayUnshifted) {
   }
 
   function onFinishedLoading(bufferList) {
-    for (var i = 0; i < bufferList.length; i++) {
-      playSound(bufferList[i], context.currentTime + cumulativeTimeArrayUnshifted[i]);
+    var comparedPosArr = sacredMusic.utils.getComparedPositionArr(absNoteArr, absNoteSet);
+    for (let i = 0; i < comparedPosArr.length; i++) {
+      playSound(bufferList[ comparedPosArr[i] ], context.currentTime + cumulativeTimeArrayUnshifted[i]);
     }
   }
 }
-
-
-
-
 
 module.exports = {
   initSound: initSound

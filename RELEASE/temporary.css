@@ -186,6 +186,13 @@ option{
   box-shadow: 1px 1px 49px 1px rgba(0,0,0,.1);
 }
 
+#stopButton{
+  background-color: rgba(230, 137, 100, 0.7);
+  color: rgba(241, 241, 241, 0.9);
+}
+#stopButton:hover{
+  background-color: rgba(223, 63, 0, 0.7);
+}
 
 .infoDiv{
   margin-top: 10px;

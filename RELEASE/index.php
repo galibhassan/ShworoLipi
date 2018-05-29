@@ -99,9 +99,10 @@
       <div id="userInputNotes" class="userInputNotesClass scroll4" contenteditable="true" spellcheck="false">
         <span class="userInputPlaceHolder"> </span>
       </div>
-      <div id="inputErrorDiv" class="smallText">  </div>
+      <div id="inputErrorDiv" class="smallText"> </div>
 
-      <button id="mainButton" class="button">Execute!</button>
+      <button id="mainButton" class="button">Play!</button>
+      <button id="stopButton" class="button"> Stop! </button>
     </div>
 
 
