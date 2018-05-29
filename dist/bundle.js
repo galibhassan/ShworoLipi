@@ -136,6 +136,41 @@ module.exports = {
 
 /***/ }),
 /* 1 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// Imports 
+var inputTextAnalyzer = __webpack_require__(15);
+var Song = __webpack_require__(16);
+var utils = __webpack_require__(4);
+var noteMapper = __webpack_require__(0);
+
+var relativeToAbsolute = function (in_noteString, tonic) {
+  if (typeof (in_noteString) === 'string') {
+    var inputSong = inputTextAnalyzer.generateThings(in_noteString);
+    var song = new Song(inputSong.noteList, tonic);
+    return song.getAbsoluteNotes();
+  }
+  else if (typeof(in_noteString) == "object" && in_noteString instanceof Array) {
+    var song = new Song(in_noteString, tonic);
+    return song.getAbsoluteNotes();
+  }
+
+}
+
+var getSongDetails = function (in_noteString) {
+  return inputTextAnalyzer.generateThings(in_noteString);
+}
+
+module.exports = {
+  relativeToAbsolute: relativeToAbsolute,
+  getSongDetails: getSongDetails,
+  utils: utils,
+  noteMapper: noteMapper
+}
+
+
+/***/ }),
+/* 2 */
 /***/ (function(module, exports) {
 
 function BufferLoader(context, urlList, callback) {
@@ -191,7 +226,7 @@ BufferLoader.prototype.load = function() {
 module.exports = BufferLoader;
 
 /***/ }),
-/* 2 */
+/* 3 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /* MIT license */
@@ -1058,7 +1093,7 @@ convert.rgb.gray = function (rgb) {
 
 
 /***/ }),
-/* 3 */
+/* 4 */
 /***/ (function(module, exports) {
 
 /**
@@ -1110,64 +1145,58 @@ var makeTimeArr = function (singlifiedBar, tempo) {
 
 
 
+var checkTargetPositionInArray = function(arr, target){
+  for(let i=0; i<arr.length; i++){
+    if(arr[i] === target){
+      return i;
+    }
+  }
+  return undefined;
+}
+
+var getComparedPositionArr = function(arrayToBeAnalyzed, arrayToSearchIn) {
+  var comparedArr = [];
+  for (let el of arrayToBeAnalyzed) {
+    comparedArr.push( checkTargetPositionInArray(arrayToSearchIn, el) );
+  }
+  return comparedArr;
+}
+
+var arraySum = function(arr){
+  var sum = 0;
+  for(el of arr){
+    sum += el;
+  }
+  return sum;
+}
+
+
 module.exports = {
   findNoteIndexInAllNotes: findNoteIndexInAllNotes,
   mergeBarsIntoSingleArr: mergeBarsIntoSingleArr, 
   makeCumulativeArr: makeCumulativeArr, 
-  makeTimeArr: makeTimeArr
+  makeTimeArr: makeTimeArr, 
+  checkTargetPositionInArray: checkTargetPositionInArray, 
+  getComparedPositionArr: getComparedPositionArr, 
+  arraySum: arraySum
 }
 
 
 
-
-/***/ }),
-/* 4 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// Imports 
-var inputTextAnalyzer = __webpack_require__(15);
-var Song = __webpack_require__(16);
-var utils = __webpack_require__(3);
-var noteMapper = __webpack_require__(0);
-
-var relativeToAbsolute = function (in_noteString, tonic) {
-  if (typeof (in_noteString) === 'string') {
-    var inputSong = inputTextAnalyzer.generateThings(in_noteString);
-    var song = new Song(inputSong.noteList, tonic);
-    return song.getAbsoluteNotes();
-  }
-  else if (typeof(in_noteString) == "object" && in_noteString instanceof Array) {
-    var song = new Song(in_noteString, tonic);
-    return song.getAbsoluteNotes();
-  }
-
-}
-
-var getSongDetails = function (in_noteString) {
-  return inputTextAnalyzer.generateThings(in_noteString);
-}
-
-module.exports = {
-  relativeToAbsolute: relativeToAbsolute,
-  getSongDetails: getSongDetails,
-  utils: utils,
-  noteMapper: noteMapper
-}
-
-console.log(relativeToAbsolute('sa', 'C5'));
 
 /***/ }),
 /* 5 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var fileMapper = __webpack_require__(19);
+var sacredMusic = __webpack_require__(1);
 
-
-var BufferLoader = __webpack_require__(1);
-function initSound(absNoteArr, cumulativeTimeArrayUnshifted) {
+var BufferLoader = __webpack_require__(2);
+function initSound(absNoteArr, cumulativeTimeArrayUnshifted, absNoteSet) {
   window.AudioContext = window.AudioContext || window.webkitAudioContext;
   context = new AudioContext();
-  var noteAudioFiles = fileMapper.absNoteArrToFileArr('instruments', 'guitarAcoustic', absNoteArr, 'ogg');
+
+  var noteAudioFiles = fileMapper.absNoteArrToFileArr('instruments', 'guitarAcoustic', absNoteSet, 'ogg');
   var bufferLoader = new BufferLoader(context, noteAudioFiles, onFinishedLoading);
   bufferLoader.load();
 
@@ -1180,15 +1209,12 @@ function initSound(absNoteArr, cumulativeTimeArrayUnshifted) {
   }
 
   function onFinishedLoading(bufferList) {
-    for (var i = 0; i < bufferList.length; i++) {
-      playSound(bufferList[i], context.currentTime + cumulativeTimeArrayUnshifted[i]);
+    var comparedPosArr = sacredMusic.utils.getComparedPositionArr(absNoteArr, absNoteSet);
+    for (let i = 0; i < comparedPosArr.length; i++) {
+      playSound(bufferList[ comparedPosArr[i] ], context.currentTime + cumulativeTimeArrayUnshifted[i]);
     }
   }
 }
-
-
-
-
 
 module.exports = {
   initSound: initSound
@@ -1742,7 +1768,7 @@ module.exports = (chalk, tmp) => {
 /* 9 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var conversions = __webpack_require__(2);
+var conversions = __webpack_require__(3);
 var route = __webpack_require__(10);
 
 var convert = {};
@@ -1826,7 +1852,7 @@ module.exports = convert;
 /* 10 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var conversions = __webpack_require__(2);
+var conversions = __webpack_require__(3);
 
 /*
 	this function routes a model to all other models.
@@ -2210,7 +2236,6 @@ var trimEveryNoteOfArr = function (arr) {
 }
 
 var findLineFeedAndJoin = function (str) {
-//  console.log(typeof str);
   str = str.toString();
   arr = str.split("\n");
   return arr.join(" ");
@@ -2272,7 +2297,7 @@ module.exports = {
 
 var allNotes = __webpack_require__(14);
 var noteMapper = __webpack_require__(0);
-var utils = __webpack_require__(3);
+var utils = __webpack_require__(4);
 /**
  * 
  * @param {Array} relativeNotes Relative notes of the song, e.g. ['SA', 'RE', 'Ga', 'মা', 'পা', 'ধা'], etc.
@@ -2601,18 +2626,15 @@ module.exports = {
 /***/ (function(module, exports, __webpack_require__) {
 
 // Imports 
-var sacredMusic = __webpack_require__(4);
-//var inputTextAnalyzer = require('./inputTextAnalyzer');
-//var Song = require('./song');
-var BufferLoader = __webpack_require__(1);
-//var utils = require('./utils');
-//var noteMapper = require('./noteMapper');
+var sacredMusic = __webpack_require__(1);
+var BufferLoader = __webpack_require__(2);
 var notePlayer = __webpack_require__(5);
 
 // Globals
 var tonic = 'C5';
 var tempo = 160;
 var singleBitDurationInSec = 60 / tempo;
+var isPlaying = false;
 
 
 window.addEventListener('load', function () {
@@ -2627,23 +2649,27 @@ window.addEventListener('load', function () {
   var tempoSelector = document.getElementById('tempo');
   tempoSelector.addEventListener("change", function () {
     tempo = tempoSelector.value;
-    //    singleBitDurationInSec = 60/tempo;
   });
 
   // ui variables
   var userInputNotesDiv = document.getElementById("userInputNotes")
   var noteTranslateDiv = document.getElementById("noteTranslateDiv");
   var inputErrorDiv = document.getElementById("inputErrorDiv");
-
+  var stopButton = this.document.getElementById("stopButton");
 
   // Things to happen while mainbutton is pressed
   var mainButton = document.getElementById("mainButton");
   mainButton.addEventListener("mousedown", function () {
-
+    isPlaying = true;
+    if (isPlaying === true) {
+      mainButton.style.opacity = '0.2';
+      mainButton.disabled = true;
+    } else {
+      isPlaying = false;
+      makeMainButtonVisible();
+    }
     var userInputNotes = document.getElementById("userInputNotes").innerText;
     var shworolipi = sacredMusic.getSongDetails(userInputNotes);
-    //var song = new Song(shworolipi.noteList, tonic);
-    //var song_absNotes = song.getAbsoluteNotes();
     var song_absNotes = sacredMusic.relativeToAbsolute(shworolipi.noteList, tonic)
 
     var singlifiedBarNoteCount = sacredMusic.utils.mergeBarsIntoSingleArr(shworolipi.barsWithNoteCount);
@@ -2653,7 +2679,8 @@ window.addEventListener('load', function () {
     cumulativeTimeArr.unshift(0);
 
     // playing note
-    notePlayer.initSound(song_absNotes, cumulativeTimeArr);
+    var absNoteSet = sacredMusic.relativeToAbsolute(shworolipi.noteSet, tonic);
+    notePlayer.initSound(song_absNotes, cumulativeTimeArr, absNoteSet);
 
 
     // Analyzed text in the warning div
@@ -2665,20 +2692,43 @@ window.addEventListener('load', function () {
       `Tempo: ${tempo}, Single beat duration (in second): ${60 / tempo}`;
     // ---------------------------------------------  
 
+    // retrieving the main (play) button
+    setTimeout(
+      function () {
+        isPlaying = false;
+        makeMainButtonVisible();
+      },
+      1000 * sacredMusic.utils.arraySum(timeArr))
   });
+
+  // stopping the audio forcefully
+  stopButton.addEventListener("mousedown", function () {
+    if (context) {
+      context.close().then(makeMainButtonVisible);
+      isPlaying = false;
+      context = undefined;
+    }
+  });
+
+  var makeMainButtonVisible = function () {
+    if (isPlaying === false) {
+      mainButton.style.opacity = '1';
+      mainButton.disabled = false;
+    }
+  }
 
   userInputNotesDiv.addEventListener("keyup", printAbsNotesFromRelNotes);
   function printAbsNotesFromRelNotes() {
     var shworolipi = sacredMusic.getSongDetails(userInputNotesDiv.innerText);
     var song_absNotes = sacredMusic.relativeToAbsolute(shworolipi.noteList, tonic)
 
-    if(shworolipi.invalidNote !== undefined && userInputNotesDiv.innerText !== ""){
-      // i.e if mistake
+    if (shworolipi.invalidNote !== undefined && userInputNotesDiv.innerText !== "") {
+      // i.e if user does mistake
       userInputNotesDiv.style.borderBottom = '2px solid rgba(210, 69, 37, .7)';
       userInputNotesDiv.style.backgroundColor = 'rgba(210, 69, 37, .1)'
       inputErrorDiv.innerText = `Invalid Eastern Note: \t   "${shworolipi.invalidNote}"`;
     } else {
-      // i.e. if NO Mistake
+      // i.e. if user does NO Mistake
       userInputNotesDiv.style.borderBottom = '2px solid rgba(0, 122, 204,.5)';
       userInputNotesDiv.style.backgroundColor = 'rgb(247, 247, 247)';
       userInputNotesDiv.style.zIndex = "-1000";
@@ -2686,8 +2736,6 @@ window.addEventListener('load', function () {
       noteTranslateDiv.innerText = song_absNotes;
       console.clear();
     }
-
-
   }
 
 
