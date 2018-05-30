@@ -120,9 +120,6 @@ option{
   font-size: inherit;
 }
 
-
-
-
 .container{
   margin-top: 60px;
   min-width: 550px;
@@ -143,7 +140,7 @@ option{
 }
 .userInputNotesClass{
   padding: 20px;
-  outline: none;\
+  outline: none;
   background-color: rgb(247, 247, 247);
   box-shadow: 1px 1px 49px 1px rgba(0,0,0,.3);
   border-radius: 4px;
@@ -154,7 +151,7 @@ option{
   overflow: auto;
 }
 .userInputNotesClass:focus{
-  border-bottom: 3px solid rgba(255, 237, 75, 0.5);
+  border-bottom: 3px solid rgba(243, 225, 120, 0.5);
 }
 
 .userInputPlaceHolder{
@@ -187,7 +184,7 @@ option{
 }
 
 #stopButton{
-  background-color: rgba(230, 137, 100, 0.7);
+  background-color: rgba(211, 72, 17, 0.7);
   color: rgba(241, 241, 241, 0.9);
 }
 #stopButton:hover{

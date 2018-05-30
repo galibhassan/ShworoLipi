@@ -7,7 +7,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <link rel="stylesheet" href="./temporary.css">
+  <link rel="stylesheet" href="./temporary-1.0.2.css">
   <title>Shworolipika</title>
 </head>
 
@@ -15,6 +15,7 @@
   <div class="sideBar scroll4">
     <div class="shworolipiRules">
       <h4>Rules</h4>
+      <h2>editing</h2>
       <hr>
       <br> Notes can be written as follows:
       <br>
@@ -118,7 +119,7 @@
     </p>
   </div>
 
-  <script src="./bundle.js"></script>
+  <script src="./bundle-1.0.2.js"></script>
 </body>
 
 </html>
