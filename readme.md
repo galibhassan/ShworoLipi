@@ -8,6 +8,7 @@ Execute the following:
 - Clone the repository: 
 `git clone https://github.com/galibhassan/ShworoLipika.git`
 - Navigate to the cloned directory: `cd ShworoLipika`
+- Install dependencies: `npm install`
 - Run the app: `npm start`
 - In your browser, open `http://localhost:8080/`
 - Input `SA RE GA ma` in the textbox and hit `play`
